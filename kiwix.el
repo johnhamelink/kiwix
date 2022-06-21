@@ -206,7 +206,8 @@ Set it to ‘t’ will use Emacs built-in ‘completing-read’."
     (when (and (file-directory-p kiwix-zim-dir) (file-readable-p kiwix-zim-dir))
       (setq kiwix-libraries
             (mapcar #'kiwix--get-library-name
-                    (directory-files kiwix-zim-dir nil ".*\\.zim\\'")))))))
+                    (mapcar #'file-name-nondirectory
+                            (directory-files-recursively kiwix-zim-dir ".*\\.zim\\'"))))))))
 
 (defun kiwix-select-library (&optional filter)
   "Select Kiwix library name."
